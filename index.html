@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <select v-model="kind">
+            <option disabled value="">Вид техники</option>
+            <option value="1">Стиральная машина</option>
+            <option value="2">Посудомоечная машина</option>
+            <option value="3">Холодильник</option>
+            <option value="4">Микроволновая печь</option>
+            <option value="5">Электроплита</option>
+            <option value="6">Водонагреватель</option>
+        </select>
+        <span>Выбрано: {{ kind }}</span>
+
+        <br>
+
+        <select v-model="age">
+            <option disabled value="">Возраст техники</option>
+            <option value="1">До 1 года</option>
+            <option value="2">Свыше 1 года</option>
+            <option value="3">Свыше 10 лет</option>
+            <option value="4">Свыше 15 лет</option>
+        </select>
+        <span>Выбрано: {{ age }}</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="calc.js"></script>
+</body>
+</html>
