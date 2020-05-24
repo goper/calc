@@ -1,35 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
-    <div id="app">
-        <select v-model="kind">
-            <option disabled value="">Вид техники</option>
-            <option value="1">Стиральная машина</option>
-            <option value="2">Посудомоечная машина</option>
-            <option value="3">Холодильник</option>
-            <option value="4">Микроволновая печь</option>
-            <option value="5">Электроплита</option>
-            <option value="6">Водонагреватель</option>
-        </select>
-        <span>Выбрано: {{ kind }}</span>
+<div id="app">
+  <div class="container">
 
-        <br>
+    <div class="row">
+      <!-- предупреждения о фозрасте  -->
+      <div v-if="selectedAgeId !== ''">
+        {{ ageCautions[selectedAgeId] }}
+      </div>
 
-        <select v-model="age">
-            <option disabled value="">Возраст техники</option>
-            <option value="1">До 1 года</option>
-            <option value="2">Свыше 1 года</option>
-            <option value="3">Свыше 10 лет</option>
-            <option value="4">Свыше 15 лет</option>
-        </select>
-        <span>Выбрано: {{ age }}</span>
+      <!-- Описание требуемого ремонта -->
+      <table class="table table-bordered" v-if="getResolution">
+
+        <thead>
+        <tr class="table-primary">
+          <th scope="col">Неисправность</th>
+          <th scope="col">Требуется ремонт</th>
+          <th scope="col">Срок</th>
+          <th scope="col">Цена</th>
+        </tr>
+        </thead>
+
+        <tr v-for="resolution in getResolution">
+          <td>{{resolution.desc}}</td>
+          <td>{{resolution.fix}}</td>
+          <td>{{resolution.time}}</td>
+          <td>{{resolution.price}}</td>
+        </tr>
+      </table>
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-    <script src="calc.js"></script>
+    <div class="row">
+      <form>
+        <div class="form-group">
+          <select v-model="kind" class="form-control">
+            <option disabled value="">Вид техники</option>
+            <option>Стиральная машина</option>
+            <option>Посудомоечная машина</option>
+            <option>Холодильник</option>
+            <option>Микроволновая печь</option>
+            <option>Электроплита</option>
+            <option>Водонагреватель</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select v-model="selectedAgeId" class="form-control">
+            <option disabled value="">Возраст техники</option>
+            <option value="0">До 1 года</option>
+            <option value="1">Свыше 1 года</option>
+            <option value="2">Свыше 10 лет</option>
+            <option value="3">Свыше 15 лет</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <!-- Виды неисправностей. Специфичны для каждого вида техники -->
+          <select v-model="selectedBug" class="form-control">
+            <option disabled value="">Неисправность</option>
+            <option v-for="bug in getBugs">
+              {{ bug.desc }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="calc.js"></script>
 </body>
 </html>
