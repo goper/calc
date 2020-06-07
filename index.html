@@ -1,97 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 <!--id="app" необходим для работы js -->
 <div id="app">
+  <div class="container">
 
-    <div class="container">
+    <div class="row">
+      <!-- предупреждения о фозрасте  -->
+      <div v-if="selectedAgeId !== ''">
+        {{ ageCautions[selectedAgeId] }}
+      </div>
 
-        <div class="row">
-            <!-- предупреждения о возрасте  -->
-            <div v-if="ageCautions[selectedAgeId]" class="alert alert-danger" role="alert">
-                {{ ageCautions[selectedAgeId] }}
-            </div>
+      <!-- Описание требуемого ремонта -->
+      <table class="table table-bordered" v-if="getResolution">
 
-            <br>
+        <thead>
+        <tr class="table-primary">
+          <th scope="col">Вероятность</th>
+          <th scope="col">Неисправность</th>
+          <th scope="col">Требуется ремонт</th>
+          <th scope="col">Срок</th>
+          <th scope="col">Цена</th>
+        </tr>
+        </thead>
 
-            <!-- Описание требуемого ремонта -->
-            <table class="table table-borderless" v-if="getResolution">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Вероятность</th>
-                    <th scope="col">Неисправность</th>
-                    <th scope="col">Причина поломки</th>
-                    <th scope="col">Срок ремонта</th>
-                    <th scope="col">Примерная стоимость ремонта, BYN</th>
-                </tr>
-                </thead>
-
-                <tr v-for="resolution in getResolution">
-                    <td>{{resolution.chance}}</td>
-                    <td>{{resolution.desc}}</td>
-                    <td>{{resolution.fix}}</td>
-                    <td>{{resolution.time}}</td>
-                    <td>{{resolution.price}}</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="row">
-            <form>
-                <div class="form-group row">
-                    <div class="col-sm-5">
-                        Вид техники:
-                    </div>
-                    <div class="col-sm-7">
-                        <select v-model="kind" class="form-control">
-                            <option disabled value="">Вид техники</option>
-                            <option>Стиральная машина</option>
-                            <option>Посудомоечная машина</option>
-                            <option>Холодильник</option>
-                            <option>Микроволновая печь</option>
-                            <option>Электроплита</option>
-                            <option>Водонагреватель</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-5">
-                        Возраст техники (лет):
-                    </div>
-
-                    <div class="col-sm-7">
-                        <select v-model="selectedAgeId" class="form-control">
-                            <option disabled value="">Возраст техники</option>
-                            <option value="0">До 1 года</option>
-                            <option value="1">Свыше 1 года</option>
-                            <option value="2">Свыше 10 лет</option>
-                            <option value="3">Свыше 15 лет</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label>Неисправность</label>
-                    <!-- Виды неисправностей. Специфичны для каждого вида техники -->
-                    <select v-model="selectedBug" class="form-control">
-                        <option disabled value="">Неисправность</option>
-                        <option v-for="bug in getBugs">
-                            {{ bug.desc }}
-                        </option>
-                    </select>
-                </div>
-            </form>
-        </div>
+        <tr v-for="resolution in getResolution">
+          <td>{{resolution.chance}}</td>
+          <td>{{resolution.desc}}</td>
+          <td>{{resolution.fix}}</td>
+          <td>{{resolution.time}}</td>
+          <td>{{resolution.price}}</td>
+        </tr>
+      </table>
 
     </div>
+
+    <div class="row">
+      <form>
+        <div class="form-group">
+          <select v-model="kind" class="form-control">
+            <option disabled value="">Вид техники</option>
+            <option>Стиральная машина</option>
+            <option>Посудомоечная машина</option>
+            <option>Холодильник</option>
+            <option>Микроволновая печь</option>
+            <option>Электроплита</option>
+            <option>Водонагреватель</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select v-model="selectedAgeId" class="form-control">
+            <option disabled value="">Возраст техники</option>
+            <option value="0">До 1 года</option>
+            <option value="1">Свыше 1 года</option>
+            <option value="2">Свыше 10 лет</option>
+            <option value="3">Свыше 15 лет</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <!-- Виды неисправностей. Специфичны для каждого вида техники -->
+          <select v-model="selectedBug" class="form-control">
+            <option disabled value="">Неисправность</option>
+            <option v-for="bug in getBugs">
+              {{ bug.desc }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+  </div>
 
 </div>
 <!-- ссылка на фреймворк. вставить перед body туда где подкл все скрипты -->

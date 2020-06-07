@@ -1,0 +1,28 @@
+.calc-form{
+    background-image: url("background.jpg");
+    background-color: #D4EDF2;
+    width: 840px;
+    padding: 15px;
+    outline: 2px solid #29A5BC;
+}
+
+.caution {
+    padding-bottom: 15px;
+    text-align: center;
+    font-style: italic;
+}
+
+.form-row {
+    padding-bottom: 15px;
+}
+
+.age-caution {
+    margin: 15px 0;
+    padding: 15px;
+    outline: 2px solid #29A5BC;
+    background-color: #D4EDF2;
+}
+
+.left, .right, .middle{
+    outline: 1px solid  red;
+}
