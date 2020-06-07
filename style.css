@@ -17,12 +17,62 @@
 }
 
 .age-caution {
-    margin: 15px 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 15px;
     outline: 2px solid #29A5BC;
     background-color: #D4EDF2;
 }
 
-.left, .right, .middle{
-    outline: 1px solid  red;
+.calc-result{
+    background: #D4EDF2;
+    outline: 2px solid #29A5BC;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.calc-result .left, .calc-result .right, .calc-result .middle{
+    line-height: 50px;
+}
+.calc-result .top {
+    height: 50px;
+    border-bottom: 1px solid #aec2d4;
+}
+
+.calc-result .bottom {
+    height: 50px;
+}
+
+.calc-result .left, .calc-result .right{
+    text-align: center;
+}
+
+.calc-result .right .top .value{
+    font-size: 20px;
+}
+
+.calc-result .middle {
+    font-style: italic;
+}
+.calc-result .middle .top{
+    font-weight: 700;
+}
+.calc-result .top .value{
+    line-height: 1;
+}
+
+.calc-result .value{
+    color: #29a5bc;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+
+}
+.calc-result .caption {
+    font-weight: normal;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
 }

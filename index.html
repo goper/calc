@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
@@ -12,57 +12,70 @@
 <div id="app">
   <div class="container">
 
-    <div class="row">
-      <!-- предупреждения о фозрасте  -->
-      <div v-if="selectedAgeId !== ''">
+    <div class="row" v-if="ageCautions[selectedAgeId]">
+      <!-- предупреждения о возрасте  -->
+      <div class="age-caution">
         {{ ageCautions[selectedAgeId] }}
       </div>
+    </div>
 
-      <!-- Описание требуемого ремонта -->
-      <table class="table table-bordered" v-if="getResolution">
-
-        <thead>
-        <tr class="table-primary">
-          <th scope="col">Вероятность</th>
-          <th scope="col">Неисправность</th>
-          <th scope="col">Требуется ремонт</th>
-          <th scope="col">Срок</th>
-          <th scope="col">Цена</th>
-        </tr>
-        </thead>
-
-        <tr v-for="resolution in getResolution">
-          <td>{{resolution.chance}}</td>
-          <td>{{resolution.desc}}</td>
-          <td>{{resolution.fix}}</td>
-          <td>{{resolution.time}}</td>
-          <td>{{resolution.price}}</td>
-        </tr>
-      </table>
-
+    <!-- Описание требуемого ремонта -->
+    <div class="resolution" v-if="getResolution">
+      <div class="row calc-result" v-for="resolution in getResolution">
+        <div class="left col-2">
+            <div class="top">
+              <div class="caption">Вероятность</div>
+              <div class="value">{{resolution.chance}} %</div>
+            </div>
+            <div class="bottom">
+              <img src="remont.png" alt="">
+            </div>
+        </div>
+        <div class="middle col-7">
+          <div class="top">{{resolution.desc}}</div>
+          <div class="bottom">{{resolution.fix}}</div>
+        </div>
+        <div class="right col-3">
+          <div class="top">
+            <div class="caption">Срок</div>
+            <div class="value"> {{resolution.time}}</div>
+          </div>
+          <div class="bottom"><div class="value">{{resolution.price}} р</div></div>
+        </div>
+      </div>
     </div>
 
     <div class="row">
-      <form>
-        <div class="form-group">
-          <select v-model="kind" class="form-control">
-            <option disabled value="">Вид техники</option>
-            <option>Стиральная машина</option>
-            <option>Посудомоечная машина</option>
-            <option>Холодильник</option>
-            <option>Микроволновая печь</option>
-            <option>Электроплита</option>
-            <option>Водонагреватель</option>
-          </select>
+
+      <form class="calc-form">
+
+        <div class="caution">Заполните форму и узнайте вероятную причину неисправности и цену ремонта стиральной
+          машины!
         </div>
-        <div class="form-group">
-          <select v-model="selectedAgeId" class="form-control">
-            <option disabled value="">Возраст техники</option>
-            <option value="0">До 1 года</option>
-            <option value="1">Свыше 1 года</option>
-            <option value="2">Свыше 10 лет</option>
-            <option value="3">Свыше 15 лет</option>
-          </select>
+
+        <div class="form-row">
+          <div class="col">
+            <select v-model="kind" class="form-control">
+              <option disabled value="">Вид техники</option>
+              <option>Стиральная машина</option>
+              <option>Посудомоечная машина</option>
+              <option>Холодильник</option>
+              <option>Микроволновая печь</option>
+              <option>Электроплита</option>
+              <option>Водонагреватель</option>
+            </select>
+          </div>
+
+          <div class="col">
+            <select v-model="selectedAgeId" class="form-control">
+              <option disabled value="">Возраст техники</option>
+              <option value="0">До 1 года</option>
+              <option value="1">Свыше 1 года</option>
+              <option value="2">Свыше 10 лет</option>
+              <option value="3">Свыше 15 лет</option>
+            </select>
+          </div>
+
         </div>
 
         <div class="form-group">
@@ -74,7 +87,9 @@
             </option>
           </select>
         </div>
+
       </form>
+
     </div>
 
   </div>
