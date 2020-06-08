@@ -1,7 +1,7 @@
 .calc-form{
     background-image: url("background.jpg");
     background-color: #D4EDF2;
-    width: 840px;
+    max-width: 840px;
     padding: 15px;
     outline: 2px solid #29A5BC;
 }
@@ -32,15 +32,17 @@
 }
 
 .calc-result .left, .calc-result .right, .calc-result .middle{
-    line-height: 50px;
+
 }
 .calc-result .top {
-    height: 50px;
+    height: 55px;
+    padding-top: 5px;
     border-bottom: 1px solid #aec2d4;
 }
 
 .calc-result .bottom {
-    height: 50px;
+    padding-top: 5px;
+    height: 55px;
 }
 
 .calc-result .left, .calc-result .right{
@@ -58,13 +60,13 @@
     font-weight: 700;
 }
 .calc-result .top .value{
-    line-height: 1;
+
 }
 
 .calc-result .value{
     color: #29a5bc;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     margin: 0;
     padding: 0;
 
@@ -74,5 +76,9 @@
     font-size: 12px;
     margin: 0;
     padding: 0;
-    line-height: 1.3;
+
+}
+
+.bottom img{
+    margin-top: 10px;
 }

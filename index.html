@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Hello, world!</title>
   <link rel="stylesheet" href="style.css"/>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -12,17 +13,15 @@
 <div id="app">
   <div class="container">
 
-    <div class="row" v-if="ageCautions[selectedAgeId]">
+    <div class="age-caution row" v-if="ageCautions[selectedAgeId]">
       <!-- предупреждения о возрасте  -->
-      <div class="age-caution">
         {{ ageCautions[selectedAgeId] }}
-      </div>
     </div>
 
     <!-- Описание требуемого ремонта -->
-    <div class="resolution" v-if="getResolution">
-      <div class="row calc-result" v-for="resolution in getResolution">
-        <div class="left col-2">
+    <div class="row calc-result" v-for="resolution in getResolution">
+
+        <div class="left col-sm-2">
             <div class="top">
               <div class="caption">Вероятность</div>
               <div class="value">{{resolution.chance}} %</div>
@@ -31,18 +30,20 @@
               <img src="remont.png" alt="">
             </div>
         </div>
-        <div class="middle col-7">
+
+        <div class="middle col-sm-7">
           <div class="top">{{resolution.desc}}</div>
           <div class="bottom">{{resolution.fix}}</div>
         </div>
-        <div class="right col-3">
+
+        <div class="right col-sm-3">
           <div class="top">
             <div class="caption">Срок</div>
             <div class="value"> {{resolution.time}}</div>
           </div>
           <div class="bottom"><div class="value">{{resolution.price}} р</div></div>
         </div>
-      </div>
+
     </div>
 
     <div class="row">
